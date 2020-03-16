@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+  <body>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBqa1iwAiUsWw0yvIaNcDefsUHz_dHPxHU",
+    authDomain: "bibliotek-93836.firebaseapp.com",
+    databaseURL: "https://bibliotek-93836.firebaseio.com",
+    projectId: "bibliotek-93836",
+    storageBucket: "bibliotek-93836.appspot.com",
+    messagingSenderId: "865592429441",
+    appId: "1:865592429441:web:a40c03deeb9543d2247680"
+  };
+  // Initialize Firebase
+
+  firebase.initializeApp(firebaseConfig);
+      let db = firebase.database();
+      // Referer til tabellen du vil jobbe med
+      let bibliotek = db.ref("bibliotek");
+
+      function submit_data(){
+        var tittel_in = document.getElementById("tittel").value;
+        var dato_in = document.getElementById("dato").value;
+        var forfatter_in = document.getElementById("forfatter").value;
+        var forlag_in = document.getElementById("forlag").value;
+        var vurdering_in = document.getElementById("vurdering").value;
+          let new_object = bibliotek.child(forfatter_in);
+
+          new_object.set(
+          {
+            tittel : tittel_in , dato : dato_in , forfatter : forfatter_in , forlag : forlag_in , vurdering : vurdering_in
+          }
+          );
+
+          window.alert("Bok lagt til i database");
+        }
+    </script>
+    <!-- HTML KODE -->
+    <input id="tittel" type="text" placeholder="Tittel" required autocomplete="off"><br>
+    <input id="dato" type="text" placeholder="Utgivelsesår" required autocomplete="off"><br>
+    <input id="forfatter" type="text" placeholder="Navn på forfatter" required autocomplete="off"><br>
+    <input id="forlag" type="text" placeholder="Forlag" required autocomplete="off"><br>
+    <select id="vurdering">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+    </select>
+    <input submit type="submit" onclick="submit_data()" value="Send inn!">
+    <!-- HTML KODE SLUTT -->
+  </body>
+</html>
